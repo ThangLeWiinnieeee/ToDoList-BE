@@ -15,16 +15,17 @@ const generalLimiter = rateLimit({
   },
 });
 
-// Auth limiter: 5 requests per 15 minutes (stricter for auth endpoints)
+// Auth limiter: 100 requests per minute (increased for development)
+// For production: reduce to 10 requests per minute
 const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // limit each IP to 5 requests per windowMs
+  windowMs: 60 * 1000, // 1 minute (instead of 15 minutes)
+  max: 100, // limit each IP to 100 requests per windowMs (instead of 5)
   message: 'Too many authentication attempts, please try again later',
-  skipSuccessfulRequests: true, // Don't count successful requests against limit
+  skipSuccessfulRequests: false, // Count all requests against limit
   handler: (req, res) => {
     res.status(429).json({
       success: false,
-      message: 'Too many login/register attempts, please try again in 15 minutes',
+      message: 'Too many login/register attempts, please try again in 1 minute',
     });
   },
 });
