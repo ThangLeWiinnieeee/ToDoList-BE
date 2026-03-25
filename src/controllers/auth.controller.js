@@ -133,7 +133,7 @@ class AuthController {
     }
   }
 
-  // Logout (placeholder - dùng client-side)
+  // Logout (placeholder - use client-side)
   async logout(req, res) {
     try {
       res.status(200).json({
