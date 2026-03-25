@@ -34,13 +34,13 @@ const todoValidationSchemas = {
         'date.base': 'Due date must be a valid date',
       }),
     tagIds: Joi.array()
-      .items(Joi.string().required())
+      .items(Joi.string())
       .optional()
       .default([])
       .messages({
         'array.base': 'Tag IDs must be an array',
       }),
-  }).unknown(false),
+  }).unknown(true),
 
   // Update todo validation
   updateTodo: Joi.object({
@@ -73,12 +73,12 @@ const todoValidationSchemas = {
         'date.base': 'Due date must be a valid date',
       }),
     tagIds: Joi.array()
-      .items(Joi.string().required())
+      .items(Joi.string())
       .optional()
       .messages({
         'array.base': 'Tag IDs must be an array',
       }),
-  }).unknown(false),
+  }).unknown(true),
 };
 
 module.exports = todoValidationSchemas;
